@@ -106,7 +106,7 @@ public class MainApp {
 								System.out.println();
 								continue;
 							} else {
-								System.out.println("수정 정보 : ");
+								System.out.print("수정 정보 : ");
 								String updateStr = sc.next();
 								
 								count = personDao.personUpdate(updateStr, columnNo, no);
