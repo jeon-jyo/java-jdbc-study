@@ -42,7 +42,7 @@ public class AuthorSelect {
 			rs = pstmt.executeQuery();									/* select */
 			
 			// 4. 결과처리
-			while(rs.next()) {
+			while(rs.next()) {											/* 처음엔 컬럼을 보고 있기 때문에 꼭 next() */
 				int authorId = rs.getInt(1);
 				String authorName = rs.getString(2);
 				String authorDesc = rs.getString(3);

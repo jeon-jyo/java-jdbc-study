@@ -1,4 +1,4 @@
-package com.jdbcex.ex02;
+package com.jdbcex.ex01;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jdbcex.ex01.AuthorVo;
-
-public class BookSelect {
+public class BookSelectOne {
 
 	public static void main(String[] args) {
 		
@@ -32,6 +30,7 @@ public class BookSelect {
 			
 			// 3. SQL문 준비 / 바인딩 / 실행
 			// SQL문 준비
+			int no = 9;
 			String query = "";
 			query += "SELECT b.book_id ";
 			query += "		 ,b.title ";
@@ -42,15 +41,17 @@ public class BookSelect {
 			query += "		 ,a.author_desc ";
 			query += "  FROM book b, author a ";
 			query += " WHERE b.author_id = a.author_id ";
+			query += "   AND b.book_id = ? ";
 			
 			pstmt = conn.prepareStatement(query);
 			// ?를 바인딩 --> 물음표 매칭 x
+			pstmt.setInt(1, no);
 			
 			// 실행
 			rs = pstmt.executeQuery();
 			
 			// 4. 결과처리
-			while(rs.next()) {
+			if(rs.next()) {
 				int bookId = rs.getInt(1);
 				String bookTitle = rs.getString(2);
 				String bookPubs = rs.getString(3);
@@ -58,7 +59,7 @@ public class BookSelect {
 				int authorId = rs.getInt(5);
 				String authorName = rs.getString(6);
 				String authorDesc = rs.getString(7);
-
+				
 				/* ========== */
 				
 				AuthorVo authorVo = new AuthorVo();

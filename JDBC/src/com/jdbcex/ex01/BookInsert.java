@@ -1,4 +1,4 @@
-package com.jdbcex.ex02;
+package com.jdbcex.ex01;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BookDelete {
+public class BookInsert {
 
 	public static void main(String[] args) {
 		
@@ -25,20 +25,23 @@ public class BookDelete {
 			
 			// 3. SQL문 준비 / 바인딩 / 실행
 			// SQL문 준비
-			int no = 9;
-			String query = "";
-			query += "DELETE FROM book ";
-			query += " WHERE author_id = ? ";
+			String bookTitle = "Java의 정석";
+			String bookPubs = "도우출판";
+			int bookAuthorId = 7;
+			String query = "INSERT INTO book "
+						 + "VALUES(seq_book_id.nextval, ?, ?, sysdate, ?) ";
 			
 			pstmt = conn.prepareStatement(query);
 			// ?를 바인딩
-			pstmt.setInt(1, no);
+			pstmt.setString(1, bookTitle);
+			pstmt.setString(2, bookPubs);
+			pstmt.setInt(3, bookAuthorId);
 			
 			// 실행
 			int count = pstmt.executeUpdate();
 			
 			// 4. 결과처리
-			System.out.println(count + "건 삭제되었습니다.");
+			System.out.println(count + "건 등록되었습니다.");
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("error : 드라이버 로딩 실패 - " + e);

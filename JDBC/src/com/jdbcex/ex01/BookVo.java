@@ -1,4 +1,4 @@
-package com.jdbcex.ex02;
+package com.jdbcex.ex01;
 
 import java.sql.Date;
 

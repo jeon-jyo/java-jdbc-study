@@ -28,7 +28,7 @@ public class AuthorInsert {
 			String name = "남궁성";
 			String desc = "개발자";
 			String query = "INSERT INTO author "
-						 + "VALUES(seq_author_id.nextval, ?, ?) ";			/* 쿼리문을 문자열로 */
+						 + "VALUES(seq_author_id.nextval, ?, ?) ";		/* 쿼리문을 문자열로 */
 			
 			pstmt = conn.prepareStatement(query);
 			// ?를 바인딩

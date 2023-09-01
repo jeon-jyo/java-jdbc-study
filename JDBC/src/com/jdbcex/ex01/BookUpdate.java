@@ -1,13 +1,12 @@
-package com.jdbcex.ex02;
+package com.jdbcex.ex01;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BookInsert {
+public class BookUpdate {
 
 	public static void main(String[] args) {
 		
@@ -26,23 +25,23 @@ public class BookInsert {
 			
 			// 3. SQL문 준비 / 바인딩 / 실행
 			// SQL문 준비
-			String bookTitle = "Java의 정석";
-			String bookPubs = "도우출판";
-			int bookAuthorId = 7;
-			String query = "INSERT INTO book "
-						 + "VALUES(seq_book_id.nextval, ?, ?, sysdate, ?) ";
+			int no = 10;
+			String str = "없음";
+			String query = "";
+			query += "UPDATE book ";
+			query += "   SET pubs = ? ";
+			query += " WHERE book_id = ? ";
 			
 			pstmt = conn.prepareStatement(query);
 			// ?를 바인딩
-			pstmt.setString(1, bookTitle);
-			pstmt.setString(2, bookPubs);
-			pstmt.setInt(3, bookAuthorId);
+			pstmt.setString(1, str);
+			pstmt.setInt(2, no);
 			
 			// 실행
 			int count = pstmt.executeUpdate();
 			
 			// 4. 결과처리
-			System.out.println(count + "건 등록되었습니다.");
+			System.out.println(count + "건 수정되었습니다.");
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("error : 드라이버 로딩 실패 - " + e);
