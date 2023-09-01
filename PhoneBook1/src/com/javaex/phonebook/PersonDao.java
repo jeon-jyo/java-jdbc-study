@@ -239,7 +239,7 @@ public class PersonDao {
 			pstmt.setInt(2, id);
 			
 			// 실행
-			pstmt.executeUpdate();
+			count = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			System.out.println("error : " + e);

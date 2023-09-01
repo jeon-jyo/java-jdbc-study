@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainApp {
+public class MainApp2 {
 	
 	public static void showMenu() {
 		System.out.println("1.리스트  2.등록  3.삭제  4.수정  5.검색  6.종료");
@@ -18,7 +18,7 @@ public class MainApp {
 		System.out.print(">메뉴번호 : ");
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InputMismatchException {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -32,13 +32,7 @@ public class MainApp {
 		while(true) {
 			
 			showMenu();
-			int num = 0;
-			try {
-				num = sc.nextInt();
-			} catch (InputMismatchException e) {
-				System.out.println("[다시 실행해 주세요.]");
-				break;
-			}
+			int num = sc.nextInt();
 			System.out.println();
 			
 			if(num == 6) {
@@ -109,13 +103,7 @@ public class MainApp {
 					
 					while(true) {
 						showUpdateMenu();
-						int columnNo = 0;
-						try {
-							columnNo = sc.nextInt();
-						} catch (InputMismatchException e) {
-							System.out.println("[다시 실행해 주세요.]");
-							break;
-						}
+						int columnNo = sc.nextInt();
 						System.out.println();
 						
 						if(columnNo == 4) {
