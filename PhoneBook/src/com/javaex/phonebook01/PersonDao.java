@@ -1,4 +1,4 @@
-package com.javaex.phonebook;
+package com.javaex.phonebook01;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

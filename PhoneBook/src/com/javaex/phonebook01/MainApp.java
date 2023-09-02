@@ -1,4 +1,4 @@
-package com.javaex.phonebook;
+package com.javaex.phonebook01;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -35,6 +35,7 @@ public class MainApp {
 			int num = 0;
 			try {
 				num = sc.nextInt();
+				sc.nextLine();
 			} catch (InputMismatchException e) {
 				System.out.println("[다시 실행해 주세요.]");
 				break;
@@ -51,6 +52,7 @@ public class MainApp {
 					System.out.println("[다시 입력해 주세요.]");
 					System.out.println();
 					continue;
+					
 				} else if (num == 1) {
 
 					System.out.println("<1.리스트>");
@@ -67,11 +69,11 @@ public class MainApp {
 					
 					System.out.println("<2.등록>");
 					System.out.print("이름 : ");
-					String name = sc.next();
+					String name = sc.nextLine();
 					System.out.print("휴대전화 : ");
-					String hp = sc.next();
+					String hp = sc.nextLine();
 					System.out.print("회사전화 : ");
-					String company = sc.next();
+					String company = sc.nextLine();
 					
 					count = personDao.personInsert(name, hp, company);
 					if(count == 1) {
@@ -85,6 +87,7 @@ public class MainApp {
 					System.out.println("<3.삭제>");
 					System.out.print("번호 : ");
 					int no = sc.nextInt();
+					sc.nextLine();
 					
 					count = personDao.personDelete(no);
 					if(count == 1) {
@@ -98,6 +101,7 @@ public class MainApp {
 					System.out.println("<4.수정>");
 					System.out.print("번호 : ");
 					int no = sc.nextInt();
+					sc.nextLine();
 					
 					PersonVo personVo = personDao.personSelectOne(no);
 					System.out.println("id : " + personVo.getId()
@@ -112,7 +116,9 @@ public class MainApp {
 						int columnNo = 0;
 						try {
 							columnNo = sc.nextInt();
+							sc.nextLine();
 						} catch (InputMismatchException e) {
+							System.out.println();
 							System.out.println("[다시 실행해 주세요.]");
 							break;
 						}
@@ -128,7 +134,7 @@ public class MainApp {
 								continue;
 							} else {
 								System.out.print("수정 정보 : ");
-								String updateStr = sc.next();
+								String updateStr = sc.nextLine();
 								
 								count = personDao.personUpdate(updateStr, columnNo, no);
 								if(count == 1) {
@@ -152,15 +158,21 @@ public class MainApp {
 					
 					System.out.println("<5.검색>");
 					System.out.print("이름 : ");
-					String str = sc.next();
+					String str = sc.nextLine();
 					
 					List<PersonVo> personList = personDao.personSearch(str);
-					for(int i = 0; i < personList.size(); i++) {
-						System.out.println("id : " + personList.get(i).getId()
-								+ ", name : " + personList.get(i).getName()
-								+ ", hp : " + personList.get(i).getHp()
-								+ ", company : " + personList.get(i).getCompany()
-								);
+					if (personList.size() > 0) {
+						System.out.println("검색 결과 : " + personList.size() + "건");
+						
+						for(int i = 0; i < personList.size(); i++) {
+							System.out.println("id : " + personList.get(i).getId()
+									+ ", name : " + personList.get(i).getName()
+									+ ", hp : " + personList.get(i).getHp()
+									+ ", company : " + personList.get(i).getCompany()
+									);
+						}
+					} else {
+						System.out.println("검색 결과가 없습니다.");
 					}
 					
 				}
