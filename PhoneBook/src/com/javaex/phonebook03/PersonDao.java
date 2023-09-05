@@ -220,6 +220,7 @@ public class PersonDao {
 				query += " WHERE name LIKE '%' || ? || '%' ";
 //				query += " WHERE name LIKE ? ";
 			}
+			query += " ORDER BY id ";
 
 			pstmt = conn.prepareStatement(query);
 			// ?를 바인딩**********************************************************************
