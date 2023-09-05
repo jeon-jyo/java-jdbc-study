@@ -52,7 +52,7 @@ public class PersonDao {
 	}
 	
 	// 등록
-	public int personInsert(String name, String hp, String company) {
+	public int personInsert(PersonVo personVo) {
 
 		int count = -1;
 
@@ -66,9 +66,9 @@ public class PersonDao {
 
 			pstmt = conn.prepareStatement(query);
 			// ?를 바인딩
-			pstmt.setString(1, name);
-			pstmt.setString(2, hp);
-			pstmt.setString(3, company);
+			pstmt.setString(1, personVo.getName());
+			pstmt.setString(2, personVo.getHp());
+			pstmt.setString(3, personVo.getCompany());
 
 			// 실행
 			count = pstmt.executeUpdate();

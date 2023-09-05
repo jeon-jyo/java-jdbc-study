@@ -48,9 +48,10 @@ public class PersonService {
 		System.out.print("회사전화 : ");
 		String company = sc.nextLine();
 
+		PersonVo personVo = new PersonVo(name, hp, company);
 		PersonDao personDao = new PersonDao();
 
-		int count = personDao.personInsert(name, hp, company);
+		int count = personDao.personInsert(personVo);
 		if(count == 1) {
 			System.out.println("[등록되었습니다.]");
 		} else {
