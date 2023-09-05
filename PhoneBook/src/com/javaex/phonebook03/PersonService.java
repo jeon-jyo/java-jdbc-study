@@ -23,8 +23,8 @@ public class PersonService {
 		System.out.println("<1.리스트>");
 		
 		PersonDao personDao = new PersonDao();
-		
-		List<PersonVo> personList = personDao.personSelect();
+
+		List<PersonVo> personList = personDao.personSelect("");
 		for(int i = 0; i < personList.size(); i++) {
 			System.out.println("id : " + personList.get(i).getId()
 					+ ", name : " + personList.get(i).getName()
@@ -65,7 +65,6 @@ public class PersonService {
 		System.out.println("<3.삭제>");
 		
 		PersonDao personDao = new PersonDao();
-		List<PersonVo> personList = personDao.personSelect();
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.print("번호 : ");
@@ -87,8 +86,7 @@ public class PersonService {
 		System.out.println("<4.수정>");
 		
 		PersonDao personDao = new PersonDao();
-		List<PersonVo> personList = personDao.personSelect();
-		
+
 		Scanner sc = new Scanner(System.in);
 		System.out.print("번호 : ");
 		String no = sc.nextLine();
@@ -163,7 +161,7 @@ public class PersonService {
 		
 		PersonDao personDao = new PersonDao();
 		
-		List<PersonVo> personList = personDao.personSearch(str);
+		List<PersonVo> personList = personDao.personSelect(str);
 		if (personList.size() > 0) {
 			System.out.println("검색 결과 : " + personList.size() + "건");
 

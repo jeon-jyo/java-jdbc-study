@@ -8,7 +8,12 @@ public class PersonVo {
 	private String company;
 	
 	public PersonVo() {}
-	
+
+	public PersonVo(String name, String hp, String company) {
+		this.name = name;
+		this.hp = hp;
+		this.company = company;
+	}
 	public PersonVo(int id, String name, String hp, String company) {
 		this.id = id;
 		this.name = name;
@@ -39,5 +44,10 @@ public class PersonVo {
 	}
 	public void setCompany(String company) {
 		this.company = company;
+	}
+
+	@Override
+	public String toString() {
+		return "PersonVo [id=" + id + ", name=" + name + ", hp=" + hp + ", company=" + company + "]";
 	}
 }

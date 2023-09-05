@@ -51,53 +51,6 @@ public class PersonDao {
 		}
 	}
 	
-	// 리스트
-	public List<PersonVo> personSelect() {
-
-		List<PersonVo> personList = new ArrayList<PersonVo>();
-
-		this.getConnection();
-
-		try {
-			// 3. SQL문 준비 / 바인딩 / 실행
-			// SQL문 준비
-			String query = "";
-			query += "SELECT id ";
-			query += "		 ,name ";
-			query += "		 ,hp ";
-			query += "		 ,company ";
-			query += "  FROM person ";
-
-			pstmt = conn.prepareStatement(query);
-
-			// 실행
-			rs = pstmt.executeQuery();
-
-			// 4. 결과처리
-			while(rs.next()) {
-				int id = rs.getInt(1);
-				String name = rs.getString(2);
-				String hp = rs.getString(3);
-				String company = rs.getString(4);
-
-				PersonVo personVo = new PersonVo();
-				personVo.setId(id);
-				personVo.setName(name);
-				personVo.setHp(hp);
-				personVo.setCompany(company);
-
-				personList.add(personVo);
-			}
-
-		} catch (SQLException e) {
-			System.out.println("error : " + e);
-		}
-
-		this.close();
-
-		return personList;
-	}
-	
 	// 등록
 	public int personInsert(String name, String hp, String company) {
 
@@ -246,8 +199,8 @@ public class PersonDao {
 		return count;
 	}
 	
-	// 검색
-	public List<PersonVo> personSearch(String word) {
+	// 리스트 + 검색
+	public List<PersonVo> personSelect(String word) {
 
 		List<PersonVo> personList = new ArrayList<PersonVo>();
 
@@ -262,11 +215,18 @@ public class PersonDao {
 			query += "		 ,hp ";
 			query += "		 ,company ";
 			query += "  FROM person ";
-			query += " WHERE name LIKE '%' || ? || '%' ";
+			/**********************************************************************/
+			if(!word.equals("")) {	// word가 ""가 아니면 ==> word가 있으면 검색
+				query += " WHERE name LIKE '%' || ? || '%' ";
+//				query += " WHERE name LIKE ? ";
+			}
 
 			pstmt = conn.prepareStatement(query);
-			// ?를 바인딩
-			pstmt.setString(1, word);
+			// ?를 바인딩**********************************************************************
+			if(!word.equals("")) {	// word가 ""가 아니면 ==> word가 있으면 검색
+				pstmt.setString(1, word);
+//				pstmt.setString(1, "%" + word + "%");
+			}
 
 			// 실행
 			rs = pstmt.executeQuery();
@@ -296,5 +256,5 @@ public class PersonDao {
 
 		return personList;
 	}
-	
+
 }
